@@ -1,0 +1,29 @@
+# Credits to : https://statacumen.com/teach/RSM/notes/RSM_06.pdf
+## Functions for desirability ----------- 
+## Maximum
+f.d.max <- function(y, L, T, r) {
+    # Computes desirability function (Derringer and Suich) when object is to maximize the response y = response L = unacceptability boundary T
+    # = target acceptability boundary T r = exponent d = desirability function
+    y.L <- min(T, max(L, y))  # y if L < y, otherwise L, and y if y < T, otherwise T
+    d <- ((y.L - L)/(T - L))^r  # desirability function
+    return(d)
+}
+
+## Minimum
+f.d.min <- function(y, L, T, r) {
+    # Computes desirability function (Derringer and Suich) when object is to maximize the response y = response L = unacceptability boundary T
+    # = target acceptability boundary T r = exponent d = desirability function
+    y.L <- min(T, max(L, y))  # y if L < y, otherwise L, and y if y < T, otherwise T
+    d <- ((y.L - T)/(L - T))^r  # desirability function
+    return(d)
+}
+
+## Target
+f.d.target <- function(y, L, T, U, r1, r2) {
+    # Computes desirability function (Derringer and Suich) when object is to hit target value y = response L = unacceptability boundary T =
+    # target acceptability boundary T U = upper unacceptability boundary r1 = exponent 1 for L r2 = exponent 2 for U d = desirability function
+    y.L <- min(T, max(L, y))  # y if L < y, otherwise L, and y if y < T, otherwise T
+    y.U <- max(T, min(U, y))  # y if y < U, otherwise U, and y if T < y, otherwise T
+    d <- (((y.L - L)/(T - L))^r1) * (((U - y.U)/(U - T))^r2)  # desirability function
+    return(d)
+}
